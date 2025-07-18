@@ -1,3 +1,5 @@
+require("fowlest.init")
+
 function love.load()
-    print("Hello, world!")
+    FowlestInit.initGame(640, 480, "Digdig")
 end
