@@ -10,11 +10,15 @@ import pygame
 import sys
 
 from .utils import FSTUtils
-from ..node.base import FSTBaseNode
+from ..node import FSTBaseNode, FSTCameraNode
+
+from ..math import Vec2
+
+import time
 
 class FSTEngine:
     def __init__(self, width: int = 640, height: int = 480):
-        print("FowlestEngine I - 2025 (C) The Fowlest Team, FowluhhDev, GamerGage")
+        FSTUtils.print_info("FowlestEngine I - 2025 (C) The Fowlest Team, FowluhhDev, GamerGage")
         
         # Window meta
         self.width = width
@@ -22,10 +26,17 @@ class FSTEngine:
         self.screen: pygame.Surface
         self.title = "Game"
         
-    def add(self, list, node: FSTBaseNode):
+        self.dt = 0
+        self._dtimes = [time.time(), 0]
+        
+        self.fps = 0
+        
+        self.camera: FSTCameraNode = FSTCameraNode()
+        
+    def add(self, list: list, node: FSTBaseNode):
         node.surface = self.screen
         list.append(node)
-        print("Node added!")
+        FSTUtils.print_info("Added node. Type is {}.".format(node.type_name))
         
     def start(self):
         # Initialize pygame
@@ -41,6 +52,12 @@ class FSTEngine:
     def update(self, nodes):
         for node in nodes:
             node._update()
+        
+        self._dtimes[1] = time.time()
+        self.dt = self._dtimes[1] - self._dtimes[0]
+        self._dtimes[0] = self._dtimes[1]
+        
+        self.fps = 1000 / self.dt
     
     def draw(self, nodes):
         self.screen.fill((0, 0, 0))
@@ -56,9 +73,12 @@ class FSTEngine:
                 self.running = False
         
     def quit(self):
-        # "Peace to the world, and my mind" -FowluhhDev 2025
+        # say the funny
+        FSTUtils.print_info("\"Peace to the world, and my mind\" -FowluhhDev 2025")
+        FSTUtils.print_info("Exiting Fowlest Engine, goodbye!")
         pygame.quit()
         sys.exit()
     
     def is_running(self):
         return self.running
+        

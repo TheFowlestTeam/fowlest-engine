@@ -6,12 +6,20 @@
 from ..math.rect import Rect
 from ..math.vec2 import Vec2
 
+import pygame
+
 class FSTBaseNode:
     def __init__(self):
         self.dimensions: Rect = Rect(Vec2(0, 0), Vec2(0, 0))
         
         self.owner = None
         self.surface = None
+        
+        self.camera = None
+        
+        self.type_name = "Base"
+        
+        self.offset: tuple[int, int] = (0, 0)
         
     def _draw(self):
         pass
@@ -24,6 +32,12 @@ class FSTBaseNode:
     
     def set_size(self, size: Vec2):
         self.dimensions.size = size
+    
+    def get_position(self):
+        return self.dimensions.position
+    
+    def get_size(self):
+        return self.dimensions.size
         
     def get_horizontal_align_position(self, width: int = 640, align: int = 0):
         match align:
