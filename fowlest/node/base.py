@@ -1,16 +1,19 @@
 # fowlest/node/base.py
 # Part of FowlestEngine
 # Created July 20th, 2025
-# 2025 (C) The Fowlest Team, FowluhhDev, GamerGage
+# 2025 (C) The Fowlest Team, FowluhhDev, GamerGage, Skinned, Avery
 
 from ..math.rect import Rect
 from ..math.vec2 import Vec2
+from ..core.signal import FSTSignal
 
 import pygame
 
 class FSTBaseNode:
     def __init__(self):
         self.dimensions: Rect = Rect(Vec2(0, 0), Vec2(0, 0))
+        
+        self.layer: None | int = None
         
         self.owner = None
         self.surface = None
@@ -19,9 +22,12 @@ class FSTBaseNode:
         
         self.type_name = "Base"
         
-        self.offset: tuple[int, int] = (0, 0)
-        
-    def _draw(self):
+        self.offset: Vec2 = Vec2(0, 0)
+    
+    def _ready(self):
+        pass
+    
+    def _draw(self, surface, camera):
         pass
     
     def _update(self):
@@ -38,6 +44,17 @@ class FSTBaseNode:
     
     def get_size(self):
         return self.dimensions.size
+    
+    def define_signal(self, name):
+        self.signals[name] = FSTSignal()
+
+    def connect_signal(self, signal_name, callback):
+        if signal_name in self.signals:
+            self.signals[signal_name].connect(callback)
+
+    def emit_signal(self, signal_name, *args, **kwargs):
+        if signal_name in self.signals:
+            self.signals[signal_name].emit(*args, **kwargs)
         
     def get_horizontal_align_position(self, width: int = 640, align: int = 0):
         match align:
