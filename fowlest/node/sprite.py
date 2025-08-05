@@ -5,8 +5,8 @@
 
 import pygame
 
-from ..base import FSTBaseNode
-from ...math import Vec2
+from ..node import FSTBaseNode
+from ..core import Vec2
 
 class FSTSpriteNode(FSTBaseNode):
     def __init__(self, image_path: str):

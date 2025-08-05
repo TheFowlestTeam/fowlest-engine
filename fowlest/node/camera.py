@@ -3,7 +3,7 @@
 # Created July 21th, 2025
 # 2025 (C) The Fowlest Team, FowluhhDev, GamerGage, Skinned, Avery
 
-from .. import FSTBaseNode
+from ..node import FSTBaseNode
 
 class FSTCameraNode(FSTBaseNode):
     def __init__(self):

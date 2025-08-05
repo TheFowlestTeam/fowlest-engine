@@ -1,5 +1,5 @@
 import pygame
-from ..core.utils import FSTUtils
+from .utils import FSTUtils
 
 class FSTLayer:
     def __init__(self):

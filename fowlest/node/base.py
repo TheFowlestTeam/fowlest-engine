@@ -3,11 +3,9 @@
 # Created July 20th, 2025
 # 2025 (C) The Fowlest Team, FowluhhDev, GamerGage, Skinned, Avery
 
-from ..math.rect import Rect
-from ..math.vec2 import Vec2
-from ..core.signal import FSTSignal
-
-import pygame
+from ..core import Rect
+from ..core import Vec2
+from ..core import FSTSignal
 
 class FSTBaseNode:
     def __init__(self):

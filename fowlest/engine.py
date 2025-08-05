@@ -9,12 +9,12 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 import sys
 
-from .utils import FSTUtils
-from ..node import FSTBaseNode, FSTCameraNode
+from .core.utils import FSTUtils
+from .node import FSTBaseNode, FSTCameraNode
 from .config import FSTConfig
-from ..display.layer import FSTLayer
+from .core.layer import FSTLayer
 
-from ..math import Vec2
+from .core.math import Vec2
 
 import time
 
